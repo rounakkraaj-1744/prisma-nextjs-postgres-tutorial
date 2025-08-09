@@ -1,0 +1,25 @@
+//this is the schema for the postgres database
+datasource db {
+  provider = "postgresql" 
+  url      = env("DATABASE_URL") 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id             Int      @id @default(autoincrement())
+  username       String   @unique
+  email          String   @unique
+  password       String   
+  framework      Framework
+  createdAt      DateTime @default(now())
+}
+
+enum Framework {
+  NEXT_JS
+  ASTRO
+  NUXT_JS
+  SVELTE
+}
